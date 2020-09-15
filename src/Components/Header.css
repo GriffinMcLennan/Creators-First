@@ -1,5 +1,5 @@
 .header {
-    background-color: wheat;
+    background-color: lightskyblue;
     border-bottom: 1px solid black;
     height: 40px;
 }
@@ -11,4 +11,8 @@
     place-items: center;
     margin-left: 10px;
     margin-right: 10px;
+}
+
+.header__icons > h1 {
+    font-weight: 800;
 }
