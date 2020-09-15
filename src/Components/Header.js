@@ -11,7 +11,6 @@ function Header() {
         <div className="header">
             <div className="header__icons">
                 <HomeIcon onClick={() => history.push("/")} />
-                <h1>OnlyThots</h1>
                 <AccountCircleIcon />
             </div>
         </div>

@@ -5,8 +5,10 @@
 
 .home__welcome > h1 {
     margin: 10px;
+    font-weight: 300;
 }
 
 .home__welcome > h3 {
     margin-bottom: 150px;
+    font-weight: 300;
 }
