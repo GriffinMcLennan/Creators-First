@@ -1,0 +1,14 @@
+.header {
+    background-color: wheat;
+    border-bottom: 1px solid black;
+    height: 40px;
+}
+
+.header__icons {
+    height: 100%;
+    display: flex;
+    justify-content: space-between;
+    place-items: center;
+    margin-left: 10px;
+    margin-right: 10px;
+}
