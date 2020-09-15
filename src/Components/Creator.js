@@ -2,6 +2,7 @@ import React, { useRef, useEffect } from "react";
 import "./Creator.css";
 import { useParams } from "react-router-dom";
 import Avatar from "@material-ui/core/Avatar";
+import Post from "./Post";
 //var probe = require("probe-image-size"); Use this for cloud function later
 
 const backgroundImage =
@@ -32,7 +33,9 @@ function Creator() {
                 <h3>Mitch Ray TA</h3>
             </div>
 
-            <div className="creator__posts"></div>
+            <div className="creator__posts">
+                <Post />
+            </div>
         </div>
     );
 }
