@@ -1,4 +1,6 @@
 .header {
+    position: sticky;
+    top: 0;
     background-color: lightskyblue;
     border-bottom: 1px solid black;
     height: 40px;

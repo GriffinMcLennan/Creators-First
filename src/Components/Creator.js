@@ -11,6 +11,23 @@ const backgroundImage =
 const profilePicture =
     "https://c10.patreonusercontent.com/3/eyJ3IjoyMDB9/patreon-media/p/campaign/1907836/3654db01e3d64bb1890d751c7364affe/3.png?token-time=2145916800&token-hash=CPFx5ZfMzkcN_CAGFuiuLjGIHn9Baw20_nB9bf3_1uw%3D";
 
+const postObjOne = {
+    title: "New Trade Setup",
+    imgURL:
+        "https://www.daytrading.com/wp-content/uploads/2017/10/Bar-chart.png",
+    description:
+        "Looking like a fibonacci retrace on bitcoin will take place any day now. Should be interesting to see how this all pans out.",
+    likes: 10,
+};
+
+const postObjTwo = {
+    title: "Bitcoin taking off!",
+    imgURL:
+        "https://news.bitcoin.com/wp-content/uploads/2020/06/average-price-of-bitcoin-more-than-quadrupled-between-reward-halvings.jpg",
+    description: "Bitcoin has been up 200% in the last month!",
+    likes: 42,
+};
+
 function Creator() {
     const { creatorId } = useParams();
 
@@ -34,7 +51,8 @@ function Creator() {
             </div>
 
             <div className="creator__posts">
-                <Post />
+                <Post info={postObjOne} />
+                <Post info={postObjTwo} />
             </div>
         </div>
     );

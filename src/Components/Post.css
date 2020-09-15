@@ -1,0 +1,11 @@
+.post {
+    margin-bottom: 50px;
+    display: grid;
+    place-items: center;
+}
+
+.post > img {
+    margin-top: 5px;
+    max-width: 400px;
+    object-fit: contain;
+}
