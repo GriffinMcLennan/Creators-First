@@ -1,0 +1,29 @@
+.creator {
+    width: 100%;
+}
+
+.creator__bg {
+    width: 100%;
+    padding-top: 25%;
+    background-size: cover;
+}
+
+.creator__profile {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    top: -50px;
+}
+
+.creator__profile > .MuiAvatar-root {
+    width: 100px;
+    height: 100px;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.creator__profile > h3 {
+    margin-left: auto;
+    margin-right: auto;
+}

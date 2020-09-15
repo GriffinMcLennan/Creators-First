@@ -2,6 +2,7 @@ import React from "react";
 import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
 import "./App.css";
 import Header from "./Components/Header";
+import Creator from "./Components/Creator";
 
 function App() {
     return (
@@ -9,8 +10,8 @@ function App() {
             <Header />
 
             <Switch>
-                <Route path="/:creatorName">
-                    <h1>Welcome to a creator Page</h1>
+                <Route path="/:creatorId">
+                    <Creator />
                 </Route>
 
                 <Route path="/">
