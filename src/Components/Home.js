@@ -3,16 +3,25 @@ import "./Home.css";
 import creatorImage1 from "./homepage_images/homepage_creator1.jpg";
 import TextField from "@material-ui/core/TextField";
 import { auth, provider } from "./../firebase";
+import { useDispatch } from "react-redux";
 
 function Home() {
     const [username, setUsername] = useState("");
     const [password, setPassword] = useState("");
+    const dispatch = useDispatch();
 
     const googleLogin = (e) => {
         e.preventDefault();
 
         auth.signInWithPopup(provider)
-            .then((result) => console.log(result))
+            .then((result) =>
+                dispatch({
+                    type: "SET_USER",
+                    payload: {
+                        result,
+                    },
+                })
+            )
             .catch((error) => error.message);
     };
 
