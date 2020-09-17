@@ -11,10 +11,8 @@ function Header() {
     const state = useSelector((state) => state);
     const dispatch = useDispatch();
 
-    const user = "null";
-
     const signOut = () => {
-        if (user === null) {
+        if (state.user.username === null) {
             return;
         }
 
