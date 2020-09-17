@@ -5,6 +5,7 @@ import TextField from "@material-ui/core/TextField";
 import { auth, provider } from "./../firebase";
 import { useDispatch, useSelector } from "react-redux";
 import Button from "@material-ui/core/Button";
+import Subscriptions from "./Subscriptions";
 
 function Home() {
     const [username, setUsername] = useState("");
@@ -111,7 +112,7 @@ function Home() {
                     </h3>
                 </div>
             ) : (
-                <h1>You are signed in!</h1>
+                <Subscriptions />
             )}
         </div>
     );

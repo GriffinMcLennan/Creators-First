@@ -1,0 +1,27 @@
+.subscription {
+    height: 75px;
+}
+
+.subscription__info {
+    display: flex;
+    flex-direction: row;
+    box-shadow: 0px 0px 1px 1px;
+    border-radius: 5px;
+    margin: 5px;
+    place-items: center;
+    height: 100%;
+}
+
+.subscription__info:hover {
+    transition: 0.3s ease-in;
+    background-color: lightgray;
+}
+
+.subscription__info > .MuiAvatar-root {
+    margin: 10px;
+}
+
+.subscription__info > h4 {
+    padding-left: 5px;
+    font-weight: 300;
+}
