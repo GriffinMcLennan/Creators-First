@@ -9,7 +9,7 @@
 }
 
 .home__welcome > h3 {
-    font-weight: 300;
+    font-weight: 500;
 }
 
 .home__body {
@@ -36,10 +36,25 @@
 }
 
 .home__input > h2 {
-    margin-top: 125px;
+    margin-top: 50px;
     margin-bottom: 50px;
+}
+
+.home__input > h2 {
+    font-weight: 300;
+    margin-bottom: 10px;
 }
 
 .home__input > .MuiFormControl-root {
     margin-bottom: 50px;
+}
+
+.home__googleLogin {
+    padding-top: 100px;
+}
+
+.home__loginNormal > .MuiButton-root {
+    width: 100px;
+    height: 50px;
+    margin: 5px;
 }
