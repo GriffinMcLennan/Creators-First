@@ -1,5 +1,5 @@
-import React, { useEffect } from "react";
-import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
+import React from "react";
+import { Route, Switch } from "react-router-dom";
 import "./App.css";
 import Header from "./Components/Header";
 import Creator from "./Components/Creator";

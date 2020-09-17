@@ -1,6 +1,6 @@
-import React, { useRef, useEffect } from "react";
+import React from "react";
 import "./Creator.css";
-import { useParams } from "react-router-dom";
+//import { useParams } from "react-router-dom";
 import Avatar from "@material-ui/core/Avatar";
 import Post from "./Post";
 //var probe = require("probe-image-size"); Use this for cloud function later
@@ -29,7 +29,7 @@ const postObjTwo = {
 };
 
 function Creator() {
-    const { creatorId } = useParams();
+    //const { creatorId } = useParams();
 
     /*
      * Load creators {backgroundImage, width, height}, profilePicture,

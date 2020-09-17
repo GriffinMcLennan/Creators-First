@@ -54,7 +54,7 @@ function Home() {
                     </h3>
 
                     <div className="home__body">
-                        <img src={creatorImage1} />
+                        <img alt="creator_image" src={creatorImage1} />
 
                         <form
                             className="home__input"
