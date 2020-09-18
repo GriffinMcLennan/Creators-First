@@ -6,6 +6,7 @@ import Post from "./Post";
 import db from "./../firebase";
 import SubscribeButton from "./SubscribeButton";
 import { useSelector } from "react-redux";
+import { SentimentSatisfied } from "@material-ui/icons";
 //var probe = require("probe-image-size"); Use this for cloud function later
 
 function Creator() {
@@ -52,6 +53,21 @@ function Creator() {
         loadUserData();
     }, [creatorId]);
 
+    useEffect(() => {
+        //check if user is signed in
+        if (state.user.username === null) {
+            return;
+        }
+
+        let subscriptions = state.user.subscriptions;
+
+        for (let i = 0; i < subscriptions.length; i++) {
+            if (subscriptions[i].toLowerCase() === creatorId.toLowerCase()) {
+                setSubscribed(true);
+            }
+        }
+    }, [state]);
+
     /*
      * Load creators {backgroundImage, width, height}, profilePicture,
      *
@@ -79,7 +95,7 @@ function Creator() {
                                 <h3>{creatorId}</h3>
                             </div>
 
-                            <SubscribeButton />
+                            {!subscribed ? <SubscribeButton /> : <div></div>}
 
                             <div className="creator__posts">
                                 {posts.map((post) => (
