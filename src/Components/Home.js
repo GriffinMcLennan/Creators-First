@@ -7,6 +7,7 @@ import { useDispatch, useSelector } from "react-redux";
 import Button from "@material-ui/core/Button";
 import Subscriptions from "./Subscriptions";
 import db from "./../firebase";
+import Search from "./Search";
 
 function Home() {
     const [username, setUsername] = useState("");
@@ -19,7 +20,9 @@ function Home() {
 
         auth.signInWithPopup(provider)
             .then((result) => {
+                console.log(result);
                 handleSignin(result);
+                handleNewUser(result);
             })
             .catch((error) => error.message);
     };
@@ -30,8 +33,8 @@ function Home() {
         auth.signInWithEmailAndPassword(username, password)
             .then((result) => {
                 handleSignin(result);
+                handleNewUser(result);
             })
-            .then(() => {})
             .catch((error) => console.log(error.message));
     };
 
@@ -41,6 +44,7 @@ function Home() {
         auth.createUserWithEmailAndPassword(username, password)
             .then((result) => {
                 handleSignin(result);
+                handleNewUser(result);
             })
             .catch((error) => console.log(error.message));
     };
@@ -58,7 +62,7 @@ function Home() {
     };
 
     const getSubscriptions = async (uid) => {
-        console.log(uid);
+        //console.log(uid);
         await db
             .collection("uidToUser")
             .doc(uid)
@@ -72,6 +76,14 @@ function Home() {
                     },
                 });
             });
+    };
+
+    const handleNewUser = (result) => {
+        if (result.additionalUserInfo.isNewUser) {
+            db.collection("uidToUser").doc(result.user.uid).set({
+                subscriptions: [],
+            });
+        }
     };
 
     return (
@@ -143,7 +155,10 @@ function Home() {
                     </h3>
                 </div>
             ) : (
-                <Subscriptions />
+                <>
+                    <Search />
+                    <Subscriptions />
+                </>
             )}
         </div>
     );

@@ -1,9 +1,16 @@
 TODOS:
+-Model user Post info on firestore.
+
 -Pull subscriptions from firebase on login, store them into state using redux with a new reducer (subscriptions, subscriptionsReducer)
     Eventually pull subscriptions from Stripe, store them into state using redux
-    
+
+
 -Add option for primitive subscribe/unsubscribe to a page
 -Display option to upload a new post if you're on your own page.
 -Setup firebase storage for post images, etc.
 
 Everyday at midnight can run subscription updater on firebase cloud functions
+
+Normal users are identified by their UID.
+
+Users store their paid paid in a separate collection located in users.
