@@ -62,13 +62,12 @@ function Home() {
     };
 
     const getSubscriptions = async (uid) => {
-        //console.log(uid);
         await db
             .collection("uidToUser")
             .doc(uid)
             .get()
             .then((result) => {
-                let subscriptions = result.data();
+                let subscriptions = result.data().subscriptions;
                 dispatch({
                     type: "SET_SUBSCRIPTIONS",
                     payload: {

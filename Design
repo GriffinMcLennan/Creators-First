@@ -1,13 +1,15 @@
 TODOS:
--Model user Post info on firestore.
+-Model user Post info on firestore. DONE
 
--Pull subscriptions from firebase on login, store them into state using redux with a new reducer (subscriptions, subscriptionsReducer)
+-Pull subscriptions from firebase on login, store them into state using redux with a new reducer (subscriptions, subscriptionsReducer) DONE
     Eventually pull subscriptions from Stripe, store them into state using redux
 
-
--Add option for primitive subscribe/unsubscribe to a page
--Display option to upload a new post if you're on your own page.
--Setup firebase storage for post images, etc.
+TOMORROW:
+    -Add option for primitive subscribe/unsubscribe to a page!
+    -Only load the posts if you're subscribed to the user!
+    -Rename Subscription.js to a more appropriate name, e.g. user tile?
+    -Display option to upload a new post if you're on your own page.
+    -Setup firebase storage for post images, etc.
 
 Everyday at midnight can run subscription updater on firebase cloud functions
 
