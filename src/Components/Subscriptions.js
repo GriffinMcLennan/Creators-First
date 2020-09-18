@@ -20,8 +20,8 @@ const subscriptionObj2 = {
 const subscriptions = [subscriptionObj1, subscriptionObj2];
 
 function Subscriptions() {
-    const uid = useSelector((state) => state.user.result.user.uid);
-    console.log(uid);
+    const uid = useSelector((state) => state.user.data.uid);
+    //console.log(uid);
 
     return (
         <div className="subscriptions">

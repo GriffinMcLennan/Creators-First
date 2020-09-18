@@ -10,6 +10,8 @@ const accountInfoReducer = (state = initialState, action) => {
             return { ...payload };
         case "REMOVE_USER":
             return { ...initialState };
+        case "SET_SUBSCRIPTIONS":
+            return { ...state, ...payload };
         default:
             return state;
     }

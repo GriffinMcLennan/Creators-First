@@ -6,6 +6,7 @@ import { auth, provider } from "./../firebase";
 import { useDispatch, useSelector } from "react-redux";
 import Button from "@material-ui/core/Button";
 import Subscriptions from "./Subscriptions";
+import db from "./../firebase";
 
 function Home() {
     const [username, setUsername] = useState("");
@@ -17,14 +18,9 @@ function Home() {
         e.preventDefault();
 
         auth.signInWithPopup(provider)
-            .then((result) =>
-                dispatch({
-                    type: "SET_USER",
-                    payload: {
-                        result,
-                    },
-                })
-            )
+            .then((result) => {
+                handleSignin(result);
+            })
             .catch((error) => error.message);
     };
 
@@ -32,7 +28,10 @@ function Home() {
         e.preventDefault();
 
         auth.signInWithEmailAndPassword(username, password)
-            .then((res) => console.log(res))
+            .then((result) => {
+                handleSignin(result);
+            })
+            .then(() => {})
             .catch((error) => console.log(error.message));
     };
 
@@ -40,8 +39,39 @@ function Home() {
         e.preventDefault();
 
         auth.createUserWithEmailAndPassword(username, password)
-            .then((res) => console.log(res))
+            .then((result) => {
+                handleSignin(result);
+            })
             .catch((error) => console.log(error.message));
+    };
+
+    const handleSignin = (result) => {
+        let data = result.user;
+        dispatch({
+            type: "SET_USER",
+            payload: {
+                data,
+            },
+        });
+
+        getSubscriptions(result.user.uid);
+    };
+
+    const getSubscriptions = async (uid) => {
+        console.log(uid);
+        await db
+            .collection("uidToUser")
+            .doc(uid)
+            .get()
+            .then((result) => {
+                let subscriptions = result.data();
+                dispatch({
+                    type: "SET_SUBSCRIPTIONS",
+                    payload: {
+                        subscriptions,
+                    },
+                });
+            });
     };
 
     return (
@@ -90,6 +120,7 @@ function Home() {
                                         variant="contained"
                                         color="primary"
                                         onClick={(e) => normalLogin(e)}
+                                        type="submit"
                                     >
                                         Login
                                     </Button>
