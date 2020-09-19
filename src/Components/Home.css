@@ -57,4 +57,11 @@
     width: 100px;
     height: 50px;
     margin: 5px;
+    background-color: lightskyblue;
+}
+
+.home__googleLogin > .MuiButton-root {
+    width: 300px;
+    background-color: white !important;
+    color: gray;
 }
