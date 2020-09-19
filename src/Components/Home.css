@@ -60,8 +60,18 @@
     background-color: lightskyblue;
 }
 
+.home__loginNormal > .MuiButton-root:hover {
+    background-color: dodgerblue;
+}
+
 .home__googleLogin > .MuiButton-root {
     width: 300px;
+    height: 60px;
     background-color: white !important;
     color: gray;
+    transition: all 0.3s ease-in;
+}
+
+.home__googleLogin > .MuiButton-root:hover {
+    background-color: lightskyblue !important;
 }
