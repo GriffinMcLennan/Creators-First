@@ -5,7 +5,7 @@ import { useSelector, useDispatch } from "react-redux";
 import { useParams } from "react-router-dom";
 import db from "./../firebase";
 
-function UnsubscribeButton() {
+function UnsubscribeButton({ clearPosts }) {
     const state = useSelector((state) => state);
     const { creatorId } = useParams();
     let dispatch = useDispatch();
@@ -19,7 +19,9 @@ function UnsubscribeButton() {
         const uid = state.user.data.uid;
         let subscriptions = state.user.subscriptions;
 
-        subscriptions = subscriptions.filter((sub) => sub !== creatorId);
+        subscriptions = subscriptions.filter(
+            (sub) => sub !== creatorId.toLowerCase()
+        );
 
         await db.collection("uidToUser").doc(uid).set({
             subscriptions: subscriptions,
@@ -31,6 +33,8 @@ function UnsubscribeButton() {
                 subscriptions,
             },
         });
+
+        clearPosts();
     };
 
     return (

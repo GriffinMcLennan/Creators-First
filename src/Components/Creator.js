@@ -58,7 +58,6 @@ function Creator() {
 
             if (!found) {
                 setLoading(false);
-                console.log("Return");
                 return;
             }
 
@@ -78,6 +77,9 @@ function Creator() {
         loadUserData();
     }, [creatorId, state]);
 
+    const clearPosts = () => {
+        setPosts([]);
+    };
     /*
     useEffect(() => {
         //check if user is signed in
@@ -125,7 +127,7 @@ function Creator() {
                             {!subscribed ? (
                                 <SubscribeButton />
                             ) : (
-                                <UnsubscribeButton />
+                                <UnsubscribeButton clearPosts={clearPosts} />
                             )}
 
                             <div className="creator__posts">

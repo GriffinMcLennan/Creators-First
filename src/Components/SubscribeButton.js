@@ -25,7 +25,7 @@ function SubscribeButton() {
             .get()
             .then((doc) => (subscriptions = doc.data().subscriptions));
 
-        subscriptions.push(creatorId);
+        subscriptions.push(creatorId.toLowerCase());
 
         await db.collection("uidToUser").doc(uid).set({
             subscriptions: subscriptions,
