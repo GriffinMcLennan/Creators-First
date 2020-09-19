@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React from "react";
 import "./SubscribeButton.css";
 import { useSelector, useDispatch } from "react-redux";
 import Button from "@material-ui/core/Button";

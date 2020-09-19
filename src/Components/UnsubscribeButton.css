@@ -1,0 +1,11 @@
+.unsubscribeButton {
+    display: flex;
+    justify-content: center;
+}
+
+.unsubscribeButton > .MuiButtonBase-root {
+    padding: 20px;
+    margin-bottom: 30px;
+    margin-top: -50px;
+    background-color: blue !important;
+}

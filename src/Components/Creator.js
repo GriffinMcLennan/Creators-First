@@ -5,6 +5,7 @@ import Avatar from "@material-ui/core/Avatar";
 import Post from "./Post";
 import db from "./../firebase";
 import SubscribeButton from "./SubscribeButton";
+import UnsubscribeButton from "./UnsubscribeButton";
 import { useSelector } from "react-redux";
 //var probe = require("probe-image-size"); Use this for cloud function later
 
@@ -52,8 +53,6 @@ function Creator() {
                     setSubscribed(true);
                     found = true;
                 }
-
-                console.log(i);
             }
 
             if (!found) {
@@ -122,7 +121,11 @@ function Creator() {
                                 <h3>{creatorId}</h3>
                             </div>
 
-                            {!subscribed ? <SubscribeButton /> : <div></div>}
+                            {!subscribed ? (
+                                <SubscribeButton />
+                            ) : (
+                                <UnsubscribeButton />
+                            )}
 
                             <div className="creator__posts">
                                 {posts.map((post) => (
