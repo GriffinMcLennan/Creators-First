@@ -7,6 +7,7 @@ import db from "./../firebase";
 import SubscribeButton from "./SubscribeButton";
 import UnsubscribeButton from "./UnsubscribeButton";
 import { useSelector } from "react-redux";
+import logo from "./loading_images/logo.svg";
 //var probe = require("probe-image-size"); Use this for cloud function later
 
 function Creator() {
@@ -104,7 +105,7 @@ function Creator() {
     return (
         <div className="creator">
             {loading ? (
-                <h1>Loading</h1>
+                <img src={logo} className="app__logo" alt="logo" />
             ) : (
                 <>
                     {userExists ? (
