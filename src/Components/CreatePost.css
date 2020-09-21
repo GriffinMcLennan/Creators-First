@@ -35,6 +35,16 @@
     transform: translate(-50%, -50%);
     border-radius: 5px;
     padding: 5px;
+    display: flex;
+    flex-direction: column;
+}
+
+.MuiFilledInput-root {
+    margin: 10px;
+}
+
+.MuiInput-root {
+    margin: 10px;
 }
 
 .display-block {
