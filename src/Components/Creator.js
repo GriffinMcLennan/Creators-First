@@ -8,6 +8,8 @@ import SubscribeButton from "./SubscribeButton";
 import UnsubscribeButton from "./UnsubscribeButton";
 import { useSelector } from "react-redux";
 import logo from "./loading_images/logo.svg";
+import capitalize from "./../functions/capitalize";
+import CreatePost from "./CreatePost";
 //var probe = require("probe-image-size"); Use this for cloud function later
 
 function Creator() {
@@ -18,11 +20,36 @@ function Creator() {
     const [userExists, setUserExists] = useState(false);
     const [loading, setLoading] = useState(true);
     const [subscribed, setSubscribed] = useState(false);
+    const [isUser, setIsUser] = useState(false);
     const state = useSelector((state) => state);
 
     useEffect(() => {
         const loadUserData = async () => {
             setSubscribed(false);
+            let ownPage = false;
+
+            if (state.user.username !== null) {
+                const uid = state.user.data.uid;
+                //console.log(uid);
+
+                await db
+                    .collection("uidToUser")
+                    .doc(uid)
+                    .get()
+                    .then((doc) => {
+                        //console.log(doc.data().username, creatorId);
+                        if (!doc.exists) {
+                            setIsUser(false);
+                        } else if (
+                            capitalize(doc.data().username) === creatorId
+                        ) {
+                            ownPage = true;
+                            setIsUser(true);
+                        } else {
+                            setIsUser(false);
+                        }
+                    });
+            }
 
             await db
                 .collection("Users")
@@ -45,15 +72,22 @@ function Creator() {
                 return;
             }
 
-            let subscriptions = state.user.subscriptions;
             let found = false;
-            for (let i = 0; i < subscriptions.length; i++) {
-                if (
-                    subscriptions[i].toLowerCase() === creatorId.toLowerCase()
-                ) {
-                    setSubscribed(true);
-                    found = true;
+
+            if (!ownPage) {
+                let subscriptions = state.user.subscriptions;
+
+                for (let i = 0; i < subscriptions.length; i++) {
+                    if (
+                        subscriptions[i].toLowerCase() ===
+                        creatorId.toLowerCase()
+                    ) {
+                        setSubscribed(true);
+                        found = true;
+                    }
                 }
+            } else {
+                found = true;
             }
 
             if (!found) {
@@ -108,7 +142,9 @@ function Creator() {
                                 <h3>{creatorId}</h3>
                             </div>
 
-                            {!subscribed ? (
+                            {isUser ? (
+                                <CreatePost />
+                            ) : !subscribed ? (
                                 <SubscribeButton />
                             ) : (
                                 <UnsubscribeButton clearPosts={clearPosts} />

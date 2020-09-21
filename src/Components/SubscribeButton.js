@@ -27,9 +27,12 @@ function SubscribeButton() {
 
         subscriptions.push(creatorId.toLowerCase());
 
-        await db.collection("uidToUser").doc(uid).set({
-            subscriptions: subscriptions,
-        });
+        await db.collection("uidToUser").doc(uid).set(
+            {
+                subscriptions: subscriptions,
+            },
+            { merge: true }
+        );
 
         dispatch({
             type: "SET_SUBSCRIPTIONS",

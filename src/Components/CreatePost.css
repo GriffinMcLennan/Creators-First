@@ -1,0 +1,46 @@
+.createpost {
+    display: flex;
+    justify-content: center;
+}
+
+.createpost > .MuiButton-root {
+    height: 50px;
+    color: black;
+    background-color: lightgray;
+    margin-bottom: 35px;
+    margin-top: -20px;
+}
+
+.createpost > .MuiButton-root:hover {
+    color: white;
+    background-color: rgb(100, 104, 103);
+}
+
+.modal {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.6);
+}
+
+.modal-main {
+    position: fixed;
+    background: white;
+    width: 50vw;
+    height: 50vh;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    border-radius: 5px;
+    padding: 5px;
+}
+
+.display-block {
+    display: block;
+}
+
+.display-none {
+    display: none;
+}

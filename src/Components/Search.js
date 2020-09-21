@@ -25,6 +25,7 @@ function Search() {
 
     return (
         <div className="search">
+            <h2>Search Users:</h2>
             <div className="search__box">
                 <TextField
                     id="outlined-basic"
@@ -41,6 +42,7 @@ function Search() {
                         name={user.username}
                         username={user.username}
                         profileImageURL={user.profilePicture}
+                        key={user.username}
                     />
                 ))}
             </div>

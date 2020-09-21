@@ -29,6 +29,7 @@
 }
 
 .app__logo {
+    margin-top: 20vh;
     width: 100%;
     display: grid;
     place-items: center;
