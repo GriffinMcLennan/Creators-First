@@ -99,6 +99,7 @@ function Creator() {
                 .collection("Users")
                 .doc(creatorId)
                 .collection("Posts")
+                .orderBy("time", "desc")
                 .get()
                 .then((docs) => {
                     setPosts(docs.docs.map((doc) => doc.data()));
