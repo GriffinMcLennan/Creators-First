@@ -80,22 +80,6 @@ function Creator() {
     const clearPosts = () => {
         setPosts([]);
     };
-    /*
-    useEffect(() => {
-        //check if user is signed in
-        if (state.user.username === null) {
-            return;
-        }
-
-        let subscriptions = state.user.subscriptions;
-
-        for (let i = 0; i < subscriptions.length; i++) {
-            if (subscriptions[i].toLowerCase() === creatorId.toLowerCase()) {
-                setSubscribed(true);
-            }
-        }
-    }, [state]);
-    */
 
     /*
      * Load creators {backgroundImage, width, height}, profilePicture,

@@ -1,8 +1,11 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import "./Subscriptions.css";
 import { useSelector } from "react-redux";
 import Subscription from "./Subscription";
+import db from "./../firebase";
+import capitalize from "./../functions/capitalize";
 
+/*
 const subscriptionObj1 = {
     name: "Tyler",
     username: "Tyler",
@@ -18,18 +21,55 @@ const subscriptionObj2 = {
 };
 
 const subscriptions = [subscriptionObj1, subscriptionObj2];
+*/
 
 function Subscriptions() {
-    const uid = useSelector((state) => state.user.data.uid);
+    const state = useSelector((state) => state);
+    const [subscriptions, setSubscriptions] = useState([]);
+
+    useEffect(() => {
+        const getData = async (user) => {
+            var userData;
+
+            await db
+                .collection("Users")
+                .doc(capitalize(user))
+                .get()
+                .then((info) => {
+                    userData = info.data();
+                });
+
+            return userData;
+        };
+
+        const map = async () => {
+            const subUsers = state.user.subscriptions;
+
+            let results = await Promise.all(
+                subUsers.map(async (user) => {
+                    return await getData(user);
+                })
+            );
+
+            setSubscriptions(results);
+        };
+
+        if (state.user.subscriptions === undefined) {
+            return;
+        }
+
+        map();
+    }, [state]);
 
     return (
         <div className="subscriptions">
             <h2>Subscriptions:</h2>
             {subscriptions.map((subscription) => (
                 <Subscription
-                    name={subscription.name}
+                    name={subscription.username}
                     username={subscription.username}
-                    profileImageURL={subscription.profileImageURL}
+                    profileImageURL={subscription.profilePicture}
+                    key={subscription.username}
                 />
             ))}
         </div>

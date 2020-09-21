@@ -13,12 +13,14 @@ function Search() {
         db.collection("Users")
             .get()
             .then((data) => {
-                setUsers(data.docs.map((user) => user.data().username));
+                setUsers(data.docs.map((user) => user.data()));
             });
     }, []);
 
     useEffect(() => {
-        setFilteredUsers(users.filter((user) => user.includes(searchedUser)));
+        setFilteredUsers(
+            users.filter((user) => user.username.includes(searchedUser))
+        );
     }, [searchedUser, users]);
 
     return (
@@ -36,9 +38,9 @@ function Search() {
             <div className="search__results">
                 {filteredUsers.map((user) => (
                     <Subscription
-                        name={user}
-                        username={user}
-                        profileImageURL={""}
+                        name={user.username}
+                        username={user.username}
+                        profileImageURL={user.profilePicture}
                     />
                 ))}
             </div>
