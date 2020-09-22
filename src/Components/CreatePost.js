@@ -8,14 +8,15 @@ import LinearProgress from "@material-ui/core/LinearProgress";
 import firebase from "firebase";
 import db from "./../firebase";
 import { useParams } from "react-router-dom";
-//Firebase.ServerValue.TIMESTAMP,
+import { v4 as uuid } from "uuid";
 
-function CreatePost() {
+function CreatePost({ posts, setPosts }) {
     const [show, setShow] = useState(false);
     const [image, setImage] = useState({});
     const [title, setTitle] = useState("");
     const [description, setDescription] = useState("");
     const [uploading, setUploading] = useState(false);
+    const [done, setDone] = useState(false);
     const [pct, setPct] = useState(0);
     const { creatorId } = useParams();
 
@@ -26,6 +27,7 @@ function CreatePost() {
         setImage({});
         setDescription("");
         setTitle("");
+        setDone(false);
     };
 
     const handleChange = (e) => {
@@ -40,7 +42,20 @@ function CreatePost() {
     };
 
     const uploadImage = () => {
-        const uploadTask = storage.ref(`/images/${image.name}`).put(image);
+        let imageParts = image.name.split(".");
+        if (imageParts.length > 2) {
+            alert("Filename contains too many .");
+            return;
+        } else if (imageParts.length === 1) {
+            alert("Filename must contain an extension type");
+            return;
+        }
+
+        const extensionType = imageParts[1];
+        const identifer = uuid();
+        const filename = identifer + "." + extensionType;
+
+        const uploadTask = storage.ref(`/${creatorId}/${filename}`).put(image);
         setUploading(true);
 
         uploadTask.on(
@@ -59,26 +74,39 @@ function CreatePost() {
 
             () => {
                 storage
-                    .ref("images")
-                    .child(image.name)
+                    .ref(`${creatorId}`)
+                    .child(filename)
                     .getDownloadURL()
-                    .then((url) => {
-                        console.log(url);
-                        uploadPost(url);
+                    .then(async (url) => {
+                        uploadPost(url, identifer);
                     });
+
+                setDone(true);
             }
         );
     };
 
-    const uploadPost = async (imgURL) => {
+    const uploadPost = async (imgURL, identifier) => {
         await db.collection("Users").doc(creatorId).collection("Posts").add({
             description: description,
             imgURL: imgURL,
-            key: 10,
+            key: identifier,
             likes: 0,
             time: firebase.firestore.FieldValue.serverTimestamp(),
             title: title,
         });
+
+        setPosts([
+            {
+                description: description,
+                imgURL: imgURL,
+                key: identifier,
+                likes: 0,
+                time: firebase.firestore.FieldValue.serverTimestamp(),
+                title: title,
+            },
+            ...posts,
+        ]);
     };
 
     return (
@@ -91,11 +119,16 @@ function CreatePost() {
                 Create New Post!
             </Button>
 
-            <Modal handleClose={handleClose} show={show}>
+            <Modal
+                handleClose={handleClose}
+                show={show}
+                uploading={uploading && !done}
+            >
                 <TextField
                     label="Title"
                     variant="filled"
                     onChange={(e) => setTitle(e.target.value)}
+                    value={title}
                 />
                 <TextField
                     label="Description"
@@ -103,6 +136,7 @@ function CreatePost() {
                     rows={4}
                     variant="filled"
                     onChange={(e) => setDescription(e.target.value)}
+                    value={description}
                 />
                 <Input
                     type="file"
@@ -128,17 +162,24 @@ function CreatePost() {
     );
 }
 
-const Modal = ({ handleClose, show, children }) => {
+const Modal = ({ handleClose, show, uploading, children }) => {
     const showHideClassName = show
         ? "modal display-block"
         : "modal display-none";
 
     return (
         <div className={showHideClassName}>
-            <section className="modal-main">
+            <div className="modal-main">
                 {children}
-                <button onClick={() => handleClose()}>close</button>
-            </section>
+                <Button
+                    disabled={uploading}
+                    color="secondary"
+                    variant="contained"
+                    onClick={() => handleClose()}
+                >
+                    close
+                </Button>
+            </div>
         </div>
     );
 };

@@ -38,7 +38,7 @@ function Creator() {
                     .get()
                     .then((doc) => {
                         //console.log(doc.data().username, creatorId);
-                        if (!doc.exists) {
+                        if (!doc.exists || doc.data().username === undefined) {
                             setIsUser(false);
                         } else if (
                             capitalize(doc.data().username) === creatorId
@@ -144,7 +144,7 @@ function Creator() {
                             </div>
 
                             {isUser ? (
-                                <CreatePost />
+                                <CreatePost posts={posts} setPosts={setPosts} />
                             ) : !subscribed ? (
                                 <SubscribeButton />
                             ) : (

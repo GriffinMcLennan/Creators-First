@@ -10,14 +10,17 @@ Completed:
     -Pull user profile pictures from the database too for creator.js DONE
     -Display option to upload a new post if you're on your own page. DONE
     -Setup firebase storage for post images, etc. DONE
+    -Setup uuid for images uploaded, fix file path too. DONE
+    -Rename Subscription.js to a more appropriate name, e.g. user tile? => CreatorTile. DONE
+    -Clean up CreatePost UI, display success message upon completed post upload.
 
 TOMORROW:
-    -Rename Subscription.js to a more appropriate name, e.g. user tile? => CreatorTile
     -Allow user to create a creatorpage.
     -Create user menu (top right click)
-    -Clean up CreatePost UI, display success message upon completed post upload.
     -Firestore security rules.
     -Setup interactive like count with database
+    -Create register page
+    -Redirect to register page if not signed in and clicks subscribe button
 
 Everyday at midnight can run subscription updater on firebase cloud functions
 
