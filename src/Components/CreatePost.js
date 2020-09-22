@@ -9,6 +9,7 @@ import firebase from "firebase";
 import db from "./../firebase";
 import { useParams } from "react-router-dom";
 import { v4 as uuid } from "uuid";
+import validateImage from "./../functions/validateImage";
 
 function CreatePost({ posts, setPosts }) {
     const [show, setShow] = useState(false);
@@ -42,16 +43,11 @@ function CreatePost({ posts, setPosts }) {
     };
 
     const uploadImage = () => {
-        let imageParts = image.name.split(".");
-        if (imageParts.length > 2) {
-            alert("Filename contains too many .");
-            return;
-        } else if (imageParts.length === 1) {
-            alert("Filename must contain an extension type");
+        const { valid, extensionType } = validateImage(image);
+        if (!valid) {
             return;
         }
 
-        const extensionType = imageParts[1];
         const identifer = uuid();
         const filename = identifer + "." + extensionType;
 
@@ -62,14 +58,14 @@ function CreatePost({ posts, setPosts }) {
             "state_changed",
 
             (snapshot) => {
-                console.log(snapshot);
+                //console.log(snapshot);
                 let pct =
                     (snapshot.bytesTransferred / snapshot.totalBytes) * 100;
                 setPct(pct);
             },
 
             (err) => {
-                console.log(err);
+                alert(err.message);
             },
 
             () => {
