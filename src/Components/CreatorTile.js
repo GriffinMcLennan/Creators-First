@@ -9,7 +9,7 @@ function CreatorTile({ name, username, profileImageURL }) {
     return (
         <div
             className="creatorTile"
-            onClick={() => history.push(`/${username}`)}
+            onClick={() => history.push(`/creator/${username}`)}
         >
             <div className="creatorTile__info">
                 <Avatar src={profileImageURL} />

@@ -1,0 +1,17 @@
+.createPage {
+    width: 100%;
+}
+
+.createPage__link {
+    display: flex;
+    justify-content: center;
+}
+
+.createPage__link > .MuiButton-root {
+    height: 50px;
+    background-color: royalblue;
+}
+
+.createPage__link > .MuiButton-root:hover {
+    background-color: midnightblue;
+}

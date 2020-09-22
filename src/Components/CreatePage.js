@@ -1,39 +1,36 @@
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 import "./CreatePage.css";
-import { useSelector } from "react-redux";
-import db from "../firebase";
-import CreatePageForm from "./CreatePageForm";
+import TextField from "@material-ui/core/TextField";
+import Button from "@material-ui/core/Button";
+import Input from "@material-ui/core/Input";
 
 function CreatePage() {
-    const state = useSelector((state) => state);
-    const [pageExists, setPageExists] = useState(false);
-    const [loading, setLoading] = useState(true);
-
-    useEffect(() => {
-        const checkForPage = async () => {
-            setLoading(true);
-
-            const uid = state.user.data.uid;
-
-            let res = await db
-                .collection("uidToUser")
-                .doc(uid)
-                .get()
-                .then((res) => res.data().username);
-
-            if (res !== undefined) {
-                setPageExists(true);
-            }
-
-            setLoading(false);
-        };
-
-        checkForPage();
-    }, [state]);
+    const [username, setUsername] = useState("");
 
     return (
         <div className="createPage">
-            {loading ? <></> : pageExists ? <></> : <CreatePageForm />}
+            <form className="input__container">
+                <TextField
+                    id="standard-basic"
+                    label="Page Name"
+                    autoComplete="off"
+                    onChange={(e) => setUsername(e.target.value)}
+                />
+
+                <div className="image__container">
+                    <p>Cover Photo:</p>
+                    <Input type="file" style={{ flex: 1 }} />
+                </div>
+
+                <div className="image__container">
+                    <p>Profile Picture:</p>
+                    <Input type="file" style={{ flex: 1 }} />
+                </div>
+
+                <Button type="submit" color="primary" variant="contained">
+                    Create Page
+                </Button>
+            </form>
         </div>
     );
 }

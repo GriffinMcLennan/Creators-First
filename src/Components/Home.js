@@ -8,7 +8,7 @@ import Button from "@material-ui/core/Button";
 import Subscriptions from "./Subscriptions";
 import db from "./../firebase";
 import Search from "./Search";
-import CreatePage from "./CreatePage";
+import CreatePageLink from "./CreatePageLink";
 
 function Home() {
     const [username, setUsername] = useState("");
@@ -158,7 +158,7 @@ function Home() {
                 <>
                     <Search />
                     <Subscriptions />
-                    <CreatePage />
+                    <CreatePageLink />
                 </>
             )}
         </div>

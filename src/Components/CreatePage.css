@@ -1,0 +1,36 @@
+.createPage {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+}
+
+.input__container {
+    margin-top: 20vh;
+    margin-left: auto;
+    margin-right: auto;
+    display: flex;
+    flex-direction: column;
+    width: 50vw;
+}
+
+.input__container > .MuiFormControl-root {
+    width: 100%;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.image__container {
+    display: flex;
+    margin-top: 30px;
+    width: 100%;
+    place-items: center;
+}
+
+.image__container > p {
+    margin-right: 10px;
+    width: 110px;
+}
+
+.input__container > .MuiButtonBase-root {
+    margin: 20px;
+}
