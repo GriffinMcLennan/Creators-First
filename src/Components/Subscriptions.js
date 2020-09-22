@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import "./Subscriptions.css";
 import { useSelector } from "react-redux";
-import Subscription from "./Subscription";
+import CreatorTile from "./CreatorTile";
 import db from "./../firebase";
 import capitalize from "./../functions/capitalize";
 
@@ -65,7 +65,7 @@ function Subscriptions() {
         <div className="subscriptions">
             <h2>Subscriptions:</h2>
             {subscriptions.map((subscription) => (
-                <Subscription
+                <CreatorTile
                     name={subscription.username}
                     username={subscription.username}
                     profileImageURL={subscription.profilePicture}

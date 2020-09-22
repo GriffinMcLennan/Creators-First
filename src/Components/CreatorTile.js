@@ -1,17 +1,17 @@
 import React from "react";
-import "./Subscription.css";
+import "./CreatorTile.css";
 import Avatar from "@material-ui/core/Avatar";
 import { useHistory } from "react-router-dom";
 
-function Subscription({ name, username, profileImageURL }) {
+function CreatorTile({ name, username, profileImageURL }) {
     const history = useHistory();
 
     return (
         <div
-            className="subscription"
+            className="creatorTile"
             onClick={() => history.push(`/${username}`)}
         >
-            <div className="subscription__info">
+            <div className="creatorTile__info">
                 <Avatar src={profileImageURL} />
                 <h4>{name}</h4>
             </div>
@@ -19,4 +19,4 @@ function Subscription({ name, username, profileImageURL }) {
     );
 }
 
-export default Subscription;
+export default CreatorTile;

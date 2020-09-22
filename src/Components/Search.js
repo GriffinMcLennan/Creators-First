@@ -2,7 +2,7 @@ import { TextField } from "@material-ui/core";
 import React, { useEffect, useState } from "react";
 import "./Search.css";
 import db from "./../firebase";
-import Subscription from "./Subscription";
+import CreatorTile from "./CreatorTile";
 
 function Search() {
     const [searchedUser, setSearchedUser] = useState("");
@@ -38,7 +38,7 @@ function Search() {
 
             <div className="search__results">
                 {filteredUsers.map((user) => (
-                    <Subscription
+                    <CreatorTile
                         name={user.username}
                         username={user.username}
                         profileImageURL={user.profilePicture}
