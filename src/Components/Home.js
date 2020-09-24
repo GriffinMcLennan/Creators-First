@@ -74,7 +74,7 @@ function Home() {
             },
         });
 
-        getSubscriptions(result.user.uid);
+        getSubscriptions(data.uid);
     };
 
     const getSubscriptions = async (uid) => {
