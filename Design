@@ -12,10 +12,11 @@ Completed:
     -Setup firebase storage for post images, etc. DONE
     -Setup uuid for images uploaded, fix file path too. DONE
     -Rename Subscription.js to a more appropriate name, e.g. user tile? => CreatorTile. DONE
-    -Clean up CreatePost UI, display success message upon completed post upload.
+    -Clean up CreatePost UI, display success message upon completed post upload. DONE
+    -Allow user to create a creatorpage. DONE
 
 TOMORROW:
-    -Allow user to create a creatorpage.
+    
     -Create user menu (top right click)
     -Firestore security rules.
     -Setup interactive like count with database

@@ -1,4 +1,6 @@
 const validateImage = (img) => {
+    console.log(img);
+
     if (Object.entries(img) === 0) {
         alert(
             "Please select an image for both profile picture and cover photo"
