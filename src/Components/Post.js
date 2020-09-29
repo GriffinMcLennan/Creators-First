@@ -8,16 +8,85 @@ function Post({
     info: { title, imgURL, description, likes },
     creatorId,
     postRef,
+    uid,
 }) {
     const [liked, setLiked] = useState(false);
 
     const handleLike = () => {
-        setLiked(!liked);
+        if (liked) {
+            setLiked(false);
+            db.collection("Users")
+                .doc(creatorId)
+                .collection("Posts")
+                .doc(postRef)
+                .collection("likedBy")
+                .where("uid", "==", uid)
+                .get()
+                .then((querySnapshot) => {
+                    querySnapshot.forEach((doc) => {
+                        console.log(doc.id, doc.data());
+                        db.collection("Users")
+                            .doc(creatorId)
+                            .collection("Posts")
+                            .doc(postRef)
+                            .collection("likedBy")
+                            .doc(doc.id)
+                            .delete();
+                    });
+                });
+
+            adjustLikeCount(-1);
+        } else {
+            db.collection("Users")
+                .doc(creatorId)
+                .collection("Posts")
+                .doc(postRef)
+                .collection("likedBy")
+                .add({
+                    uid: uid,
+                });
+
+            adjustLikeCount(1);
+
+            setLiked(true);
+        }
+    };
+
+    const adjustLikeCount = (num) => {
+        db.collection("Users")
+            .doc(creatorId)
+            .collection("Posts")
+            .doc(postRef)
+            .get()
+            .then((doc) => {
+                db.collection("Users")
+                    .doc(creatorId)
+                    .collection("Posts")
+                    .doc(postRef)
+                    .set(
+                        {
+                            likes: doc.data().likes + num,
+                        },
+                        { merge: true }
+                    );
+            });
     };
 
     useEffect(() => {
         const query = async () => {
-            await db.collection("Users").doc("");
+            await db
+                .collection("Users")
+                .doc(creatorId)
+                .collection("Posts")
+                .doc(postRef)
+                .collection("likedBy")
+                .where("uid", "==", uid)
+                .get()
+                .then((snapshot) => {
+                    if (!snapshot.empty) {
+                        setLiked(true);
+                    }
+                });
         };
 
         query();

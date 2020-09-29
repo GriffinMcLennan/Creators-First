@@ -160,6 +160,7 @@ function Creator() {
                                         key={post.data.key}
                                         postRef={post.id}
                                         creatorId={creatorId}
+                                        uid={state.user.data.uid}
                                     />
                                 ))}
                             </div>
