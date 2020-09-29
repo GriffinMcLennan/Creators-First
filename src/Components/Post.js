@@ -96,7 +96,7 @@ function Post({
 
         setNumLikes(likes);
         query();
-    }, []);
+    }, [creatorId, postRef, likes, uid]);
 
     return (
         <div className="post">
