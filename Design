@@ -16,7 +16,6 @@ Completed:
     -Allow user to create a creatorpage. DONE
 
 TOMORROW:
-    
     -Create user menu (top right click)
     -Firestore security rules.
     -Setup interactive like count with database

@@ -102,7 +102,12 @@ function Creator() {
                 .orderBy("time", "desc")
                 .get()
                 .then((docs) => {
-                    setPosts(docs.docs.map((doc) => doc.data()));
+                    setPosts(
+                        docs.docs.map((doc) => ({
+                            id: doc.id,
+                            data: doc.data(),
+                        }))
+                    );
                 });
 
             setLoading(false);
@@ -116,12 +121,9 @@ function Creator() {
         setPosts([]);
     };
 
-    /*
-     * Load creators {backgroundImage, width, height}, profilePicture,
-     *
-     * Load posts from {creatorId}
-     *
-     */
+    useEffect(() => {
+        console.log(posts);
+    }, [posts]);
 
     return (
         <div className="creator">
@@ -153,7 +155,12 @@ function Creator() {
 
                             <div className="creator__posts">
                                 {posts.map((post) => (
-                                    <Post info={post} key={post.key} />
+                                    <Post
+                                        info={post.data}
+                                        key={post.data.key}
+                                        postRef={post.id}
+                                        creatorId={creatorId}
+                                    />
                                 ))}
                             </div>
                         </>
