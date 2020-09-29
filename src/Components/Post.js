@@ -11,6 +11,9 @@ function Post({
     uid,
 }) {
     const [liked, setLiked] = useState(false);
+    const [numLikes, setNumLikes] = useState(0);
+
+    console.log(liked);
 
     const handleLike = () => {
         if (liked) {
@@ -53,6 +56,8 @@ function Post({
     };
 
     const adjustLikeCount = (num) => {
+        setNumLikes((liked) => liked + num);
+
         db.collection("Users")
             .doc(creatorId)
             .collection("Posts")
@@ -89,6 +94,7 @@ function Post({
                 });
         };
 
+        setNumLikes(likes);
         query();
     }, []);
 
@@ -106,7 +112,7 @@ function Post({
                         ) : (
                             <ThumbUpAltIcon />
                         )}
-                        <p>{liked ? likes + 1 : likes}</p>
+                        <p>{numLikes}</p>
                     </div>
                 </div>
             </div>
