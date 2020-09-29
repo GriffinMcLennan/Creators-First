@@ -4,6 +4,7 @@
     background-color: lightskyblue;
     border-bottom: 1px solid black;
     height: 40px;
+    z-index: 10;
 }
 
 .header__icons {
