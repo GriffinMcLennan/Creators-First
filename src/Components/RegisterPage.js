@@ -18,6 +18,10 @@ function RegisterPage() {
         }
     }, [state]);
 
+    const handleRegistration = (e) => {
+        e.preventDefault();
+    };
+
     return (
         <div className="registerpage">
             <h2>Sign-up for a Creators First Account</h2>
@@ -39,11 +43,16 @@ function RegisterPage() {
                     onChange={(e) => setPassword(e.target.value)}
                     style={TextFieldStyle}
                 />
-            </div>
 
-            <Button variant="contained" color="primary">
-                Sign-Up
-            </Button>
+                <Button
+                    variant="contained"
+                    color="primary"
+                    onClick={(e) => handleRegistration(e)}
+                    style={ButtonStyle}
+                >
+                    Sign-Up
+                </Button>
+            </div>
         </div>
     );
 }
@@ -51,6 +60,12 @@ function RegisterPage() {
 const TextFieldStyle = {
     width: "30vw",
     minWidth: "200px",
+    marginLeft: "auto",
+    marginRight: "auto",
+    marginTop: "20px",
+};
+
+const ButtonStyle = {
     marginLeft: "auto",
     marginRight: "auto",
     marginTop: "20px",
