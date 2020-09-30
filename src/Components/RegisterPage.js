@@ -7,6 +7,7 @@ import Button from "@material-ui/core/Button";
 import { auth } from "./../firebase";
 import { useDispatch } from "react-redux";
 import db from "./../firebase";
+import capitalize from "./../functions/capitalize";
 
 function RegisterPage() {
     const history = useHistory();
@@ -26,9 +27,10 @@ function RegisterPage() {
     const handleRegistration = (e) => {
         e.preventDefault();
         setLoading(true);
-        username = username.trim();
 
-        auth.createUserWithEmailAndPassword(username, password)
+        const realUsername = capitalize(username.trim().toLowerCase());
+
+        auth.createUserWithEmailAndPassword(realUsername, password)
             .then(async (result) => {
                 await handleNewUser(result);
                 handleSignin(result);

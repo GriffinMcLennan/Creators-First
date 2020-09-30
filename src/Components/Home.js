@@ -9,6 +9,7 @@ import Subscriptions from "./Subscriptions";
 import db from "./../firebase";
 import Search from "./Search";
 import CreatePageLink from "./CreatePageLink";
+import capitalize from "./../functions/capitalize";
 
 function Home() {
     const [username, setUsername] = useState("");
@@ -52,9 +53,9 @@ function Home() {
     const normalRegister = (e) => {
         e.preventDefault();
         setLoading(true);
-        username = username.trim();
+        const realUsername = capitalize(username.trim().toLowerCase());
 
-        auth.createUserWithEmailAndPassword(username, password)
+        auth.createUserWithEmailAndPassword(realUsername, password)
             .then(async (result) => {
                 await handleNewUser(result);
                 handleSignin(result);
