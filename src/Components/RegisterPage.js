@@ -128,6 +128,7 @@ const ButtonStyle = {
     marginLeft: "auto",
     marginRight: "auto",
     marginTop: "20px",
+    width: "200px",
 };
 
 export default RegisterPage;
