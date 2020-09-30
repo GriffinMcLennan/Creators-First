@@ -26,6 +26,7 @@ function RegisterPage() {
     const handleRegistration = (e) => {
         e.preventDefault();
         setLoading(true);
+        username = username.trim();
 
         auth.createUserWithEmailAndPassword(username, password)
             .then(async (result) => {

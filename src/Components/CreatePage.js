@@ -65,7 +65,8 @@ function CreatePage() {
     const handleSubmit = async (e) => {
         e.preventDefault();
         //first make sure that username isn't taken.
-        const realUsername = capitalize(username.toLowerCase());
+        const realUsername = capitalize(username.toLowerCase().trim());
+
         if (realUsername === "") {
             alert("Please enter a page name!");
             return;
@@ -91,16 +92,12 @@ function CreatePage() {
             setUp1Pct
         ); //also pass in update method
 
-        //console.log(coverPhotoURL);
-
         //upload second photo, store URL
         const profilePictureURL = await uploadImage(
             realUsername,
             profilePicture,
             setUp2Pct
         );
-
-        //console.log(profilePictureURL);
 
         //create page, add pagename to collection("uidToUser").(uid).username=pagename
         db.collection("Users").doc(realUsername).set({

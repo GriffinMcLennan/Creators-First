@@ -59,6 +59,7 @@ function Creator() {
                     if (!doc.exists) {
                         setUserExists(false);
                         setLoading(false);
+                        console.log(creatorId);
                         return;
                     }
                     let data = doc.data();

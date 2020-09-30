@@ -14,12 +14,13 @@ Completed:
     -Rename Subscription.js to a more appropriate name, e.g. user tile? => CreatorTile. DONE
     -Clean up CreatePost UI, display success message upon completed post upload. DONE
     -Allow user to create a creatorpage. DONE
+    -Setup interactive like count with database DONE
+    -Create register page DONE
+    -Link to register page if not signed in and click subscribe
 
 TOMORROW:
     -Create user menu (top right click)
     -Firestore security rules.
-    -Setup interactive like count with database
-    -Create register page
     -Redirect to register page if not signed in and clicks subscribe button
 
 Everyday at midnight can run subscription updater on firebase cloud functions

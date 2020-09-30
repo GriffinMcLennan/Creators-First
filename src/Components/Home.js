@@ -52,6 +52,7 @@ function Home() {
     const normalRegister = (e) => {
         e.preventDefault();
         setLoading(true);
+        username = username.trim();
 
         auth.createUserWithEmailAndPassword(username, password)
             .then(async (result) => {
