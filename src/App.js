@@ -5,6 +5,7 @@ import Header from "./Components/Header";
 import Creator from "./Components/Creator";
 import Home from "./Components/Home";
 import CreatePage from "./Components/CreatePage";
+import RegisterPage from "./Components/RegisterPage";
 
 function App() {
     return (
@@ -17,6 +18,10 @@ function App() {
 
                 <Route path="/create" exact>
                     <CreatePage />
+                </Route>
+
+                <Route path="/register" exact>
+                    <RegisterPage />
                 </Route>
 
                 <Route path="/">
