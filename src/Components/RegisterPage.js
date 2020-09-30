@@ -4,6 +4,9 @@ import { useHistory } from "react-router-dom";
 import { useSelector } from "react-redux";
 import TextField from "@material-ui/core/TextField";
 import Button from "@material-ui/core/Button";
+import { auth } from "./../firebase";
+import { useDispatch } from "react-redux";
+import db from "./../firebase";
 
 function RegisterPage() {
     const history = useHistory();
@@ -11,15 +14,67 @@ function RegisterPage() {
     const isSignedIn = state.user.username !== null;
     const [username, setUsername] = useState("");
     const [password, setPassword] = useState("");
+    const [loading, setLoading] = useState(false);
+    const dispatch = useDispatch();
 
     useEffect(() => {
         if (isSignedIn) {
             history.push("/");
         }
-    }, [state]);
+    }, [state, history, isSignedIn]);
 
     const handleRegistration = (e) => {
         e.preventDefault();
+        setLoading(true);
+
+        auth.createUserWithEmailAndPassword(username, password)
+            .then(async (result) => {
+                await handleNewUser(result);
+                handleSignin(result);
+                setLoading(false);
+                history.push("/");
+            })
+            .catch((error) => {
+                alert(error.message);
+                setLoading(false);
+            });
+    };
+
+    const handleSignin = (result) => {
+        let data = result.user;
+
+        dispatch({
+            type: "SET_USER",
+            payload: {
+                data,
+            },
+        });
+
+        getSubscriptions(data.uid);
+    };
+
+    const getSubscriptions = async (uid) => {
+        await db
+            .collection("uidToUser")
+            .doc(uid)
+            .get()
+            .then((result) => {
+                let subscriptions = result.data().subscriptions;
+                dispatch({
+                    type: "SET_SUBSCRIPTIONS",
+                    payload: {
+                        subscriptions,
+                    },
+                });
+            });
+    };
+
+    const handleNewUser = async (result) => {
+        if (result.additionalUserInfo.isNewUser) {
+            await db.collection("uidToUser").doc(result.user.uid).set({
+                subscriptions: [],
+            });
+        }
     };
 
     return (
@@ -49,6 +104,7 @@ function RegisterPage() {
                     color="primary"
                     onClick={(e) => handleRegistration(e)}
                     style={ButtonStyle}
+                    disabled={loading}
                 >
                     Sign-Up
                 </Button>
