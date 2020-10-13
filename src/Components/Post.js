@@ -13,8 +13,6 @@ function Post({
     const [liked, setLiked] = useState(false);
     const [numLikes, setNumLikes] = useState(0);
 
-    console.log(liked);
-
     const handleLike = () => {
         if (liked) {
             setLiked(false);

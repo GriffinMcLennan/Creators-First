@@ -122,10 +122,6 @@ function Creator() {
         setPosts([]);
     };
 
-    useEffect(() => {
-        console.log(posts);
-    }, [posts]);
-
     return (
         <div className="creator">
             {loading ? (
